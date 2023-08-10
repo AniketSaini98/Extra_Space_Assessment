@@ -1,0 +1,9 @@
+# render.yml
+
+services:
+  - name: app
+    buildCommand: npm install
+    startCommand: npm start
+    env:
+      - key: PORT
+        value: "3000"

@@ -1,0 +1,9 @@
+# Node.js / npm
+node_modules/
+.env
+
+# Docker
+docker-compose.yml
+
+# Render
+render.yaml
