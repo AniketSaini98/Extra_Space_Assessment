@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSON Formatted Display</title>
+    <style>
+      body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #35424a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+          padding: 15px 50px;
+          background-color: #35424a;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 20px 0px 0px 320px;
+        }
+
+        h2 {
+          display: flex;
+          margin-top: 50px;
+          color: #35424a;
+          justify-content: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <h1>JSON Formatted Display</h1>
+    </header>
+
+    <div class="container">
+
+        <form action="/api" method="POST">
+            <textarea name="json_data" rows="10"></textarea>
+            <br>
+            <button class="btn" type="submit">Submit</button>
+        </form>
+
+        <h2>Formatted JSON:</h2>
+        <div id="jsonContainer">
+          <table>
+            <tbody id="jsonTableBody">
+              <!-- JSON data will be displayed here -->
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <script>
+      function generateTable(data, parentElement) {
+            for (const [key, value] of Object.entries(data)) {
+                if (typeof value === 'object') {
+                    const row = parentElement.insertRow();
+                    const keyCell = row.insertCell(0);
+                    const valueCell = row.insertCell(1);
+                    keyCell.textContent = key;
+                    valueCell.textContent = '';
+                    const nestedTable = document.createElement('table');
+                    generateTable(value, nestedTable);
+                    valueCell.appendChild(nestedTable);
+                } else {
+                    const row = parentElement.insertRow();
+                    const keyCell = row.insertCell(0);
+                    const valueCell = row.insertCell(1);
+                    keyCell.textContent = key;
+                    valueCell.textContent = value;
+                }
+            }
+        }
+
+        document.querySelector('form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const jsonData = formData.get('json_data');
+            const response = await fetch('/api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+            const data = await response.json();
+            
+            const tableBody = document.getElementById('jsonTableBody');
+            tableBody.innerHTML = '';
+            generateTable(data, tableBody);
+        });
+    </script>
+  </body>
+</html>
