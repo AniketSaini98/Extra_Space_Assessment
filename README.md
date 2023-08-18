@@ -17,10 +17,11 @@ This project provides a user-friendly interface to input JSON data and visualize
 
 ## Technologies Used
 
-- HTML
-- CSS
-- JavaScript
-- Express.js (for server-side handling)
+<img src="https://cdn-icons-png.flaticon.com/512/143/143655.png" alt="HTML" width="100" height="100">
+<img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS" width="100" height="100">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JS" width="100" height="100">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" alt="NodeJS" width="100" height="100">
+<img src="https://img.icons8.com/?size=512&id=PZQVBAxaueDJ&format=png" alt="ExpressJS" width="100" height="100">
 
 ## Setup
 
@@ -46,9 +47,8 @@ node index.js
 
 ## Screenshots
 
-![Project Screenshot](https://example.com/images/screenshot.png)
-
-Include any relevant screenshots here to visually demonstrate the project's functionality.
+![Project Screenshot](JSON_1.png)
+![Project Screenshot](JSON_2.png)
 
 ## License
 
